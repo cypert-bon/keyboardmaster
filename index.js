@@ -1,3 +1,4 @@
+let keys = document.querySelectorAll("figure.keyboard div");
 const paragraph = document.getElementById("para");
 var mistakeTag = document.getElementById("mistakes");
 const timeTag = document.getElementById("timeLeft");
@@ -8,7 +9,7 @@ const input = document.getElementById("input");
 function randomParagraph(){
 let randIndex = Math.floor(Math.random() * paragraphsArr.length);
 paragraph.innerHTML = "";
-			paragraphsArr[randIndex].split("").forEach(span => {
+			paragraphsArr[randIndex].toLowerCase().split("").forEach(span => {
 						let spanTag = `<span>${span}</span>`;
 						paragraph.innerHTML += spanTag;
 			})};
@@ -16,6 +17,7 @@ cont.onclick = () => {
 			input.focus();
 }
 function typing(){
+			
 			const characters = paragraph.querySelectorAll("span");
 			let typedChar = input.value.split("")[charIndex];
 			if(!isTyping){ 
@@ -38,8 +40,29 @@ function typing(){
 			charIndex++;
 		}
 		characters.forEach(span => span.classList.remove("active"));	characters[charIndex].classList.add("active");
-		mistakeTag.innerText = mistakes;		
+		mistakeTag.innerText = mistakes;	
+		
+		// keyboard function 
+		keys.forEach(key => {
+						if (key.id == typedChar) {
+			key.classList.add("clicked");
+			setTimeout(() => {
+						key.classList.remove("clicked");
+			}, 300)
+						}
+			})
+			 	
 }		
+  // for space
+  
+document.body.onkeyup = function(e) { if (e.key == " " || e.code == "Space" || e.keyCode == 32 ) {
+			keys[70].classList.add("clicked");
+			setTimeout(() => {
+		keys[70].classList.remove("clicked");		
+			}, 300)
+   } 
+}
+
 
 function initTimer() {
 			if (timeLeft > 0) {
