@@ -308,6 +308,9 @@ body {
          .section .line {
          			left: 1.7rem;
          }
+         .section .row section {
+         			font-size: 1.2rem;
+         }
          .row.row-2 section:nth-child(1) div {
          			flex-direction: row;
          }
